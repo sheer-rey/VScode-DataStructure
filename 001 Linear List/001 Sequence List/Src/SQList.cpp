@@ -145,9 +145,12 @@ status SQList_LocateElement(sqList *L, int *i, ElementType element)
  * @param element the given element which is going to be inserted
  * @return insert operation status(sqOK, sqERROR or sqOVERFLOW)
  * @brief insert given element into specific location(given by i) of list
- * @note while sqLenth is 1, set the insert location to 2 means insert element
- * at the end of sequence list. In other words, the operation is going to insert
- * element into the rear of the specific location.
+ * @note the operation is going to insert element into the front of the specific
+ * location element, and the other elements are shifted backwards in turn.
+ * @example set the insert location to 1, what means insert element at the 
+ * begining of sequence list.
+ * @example while sqLenth is 1, set the insert location to 2 means insert element
+ * at the end of sequence list.
  * ****************************************************************************/
 status SQList_InsertElement(sqList *L, int i, ElementType element)
 {
@@ -160,7 +163,7 @@ status SQList_InsertElement(sqList *L, int i, ElementType element)
     L->sqData[j + 1] = L->sqData[j];
   L->sqData[j + 1] = element;
   L->sqLenth++;
-  return sqOK; 
+  return sqOK;
 }
 
 /*******************************************************************************
@@ -208,6 +211,7 @@ void SQList_print(sqList *L)
  * ****************************************************************************/
 void SQList_print_all(sqList *L)
 {
+  std::cout << "The max lenth of sequence list is: " << L->sqMaxSize << std::endl;
   std::cout << "The whole memery value of Sequence List is: ";
   int i;
   for (i = 0; i < L->sqMaxSize - 1; i++)
