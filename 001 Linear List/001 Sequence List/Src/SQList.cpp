@@ -146,7 +146,8 @@ status SQList_LocateElement(sqList *L, int *i, ElementType element)
  * @return insert operation status(sqOK, sqERROR or sqOVERFLOW)
  * @brief insert given element into specific location(given by i) of list
  * @note while sqLenth is 1, set the insert location to 2 means insert element
- * at the end of sequence list.
+ * at the end of sequence list. In other words, the operation is going to insert
+ * element into the rear of the specific location.
  * ****************************************************************************/
 status SQList_InsertElement(sqList *L, int i, ElementType element)
 {
@@ -159,7 +160,7 @@ status SQList_InsertElement(sqList *L, int i, ElementType element)
     L->sqData[j + 1] = L->sqData[j];
   L->sqData[j + 1] = element;
   L->sqLenth++;
-  return sqOK;
+  return sqOK; 
 }
 
 /*******************************************************************************

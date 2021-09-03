@@ -2,7 +2,7 @@
  * @file: LinkList.cpp
  * @author: sheer.rey
  * @date: Aug.16, 2021
- * @attention: In my version, the index of sequence list is beginning from 1, 
+ * @attention: In my version, the index of link list is beginning from 1, 
  * rather than array(beginning from 0).
  * 
  * @note:
@@ -26,16 +26,14 @@ enum status
 {
   llERROR,
   llCONFLICT,
-  llOVERFLOW,
   llFALSE,
   llTRUE,
   llOK
 };
 
 const std::string strSQErrorMessage[llOK + 1] = {
-    "ERROR: Specific location is not in the Sequence List range!",
-    "WARING: More than 1 identical element in Sequence List!",
-    "ERROR: Sequence List overflow!",
+    "ERROR: Specific location is not in the Link List range!",
+    "WARING: More than 1 identical element in Link List!",
     "",
     "",
     ""};
@@ -47,66 +45,13 @@ struct LinkList
   LinkList *next;
 };
 
-status LinkList_Init(LinkList *L,int ilenth);
+status LinkList_Init(LinkList *L, int ilenth);
 status LinkList_Delete(LinkList *L);
-
-/*******************************************************************************
- * @name: LinkList_Empty
- * @param: *L -- pointer to LinkList
- * @return: Sequence list empty status(llTRUE or llFALSE)
- * @brief: make sure if sequence list is empty
- * ****************************************************************************/
 status LinkList_Empty(LinkList *L);
-
-/*******************************************************************************
- * @name: LinkList_Clear
- * @param: *L -- pointer to LinkList(return value)
- * @return: Sequence list clear status(llOK)
- * @brief: clear whole sequence list
- * ****************************************************************************/
 status LinkList_Clear(LinkList *L);
-
-/*******************************************************************************
- * @name: LinkList_GetLenth
- * @param: *L -- pointer to LinkList
- *         *LinkListLenth -- pointer to current lenth of Sequence List(return Value)
- * @return: Get Sequence list lenth status(llOK)
- * @brief: Get the current lenth of Sequence List
- * ****************************************************************************/
 status LinkList_GetLenth(LinkList *L, int *LinkListLenth);
-
-/*******************************************************************************
- * @name: LinkList_GetElement
- * @param: *L -- pointer to LinkList
- *         i -- location of element which is going to get
- *         *element -- the element be get of sequence list(return value)
- * @return: get operation status(llOK or llERROR)
- * @brief: get the element given by variable i
- * ****************************************************************************/
 status LinkList_GetElement(LinkList *L, int i, ElementType *element);
-
-/*******************************************************************************
- * @name: LinkList_LocateElement
- * @param: *L -- pointer to LinkList
- *         *i -- location of given element in sequence list(return value)
- *         element -- the given element going to get of sequence list
- * @return: locate operation status(llOK, llFALSE or llCONFLICT)
- * @brief: get the location of given element
- * @note: status CONFLICT means there are more than 1 identical element in 
- * sequence list.
- *        status ERROR means given element cannot be found in sequence list.
- * ****************************************************************************/
 status LinkList_LocateElement(LinkList *L, int *i, ElementType element);
-
-/*******************************************************************************
- * @name: LinkList_InsertElement
- * @param: *L -- pointer to LinkList(return value)
- *         i -- location of list where given element is going to be inserted
- *         element -- the given element which is going to be inserted
- * @return: insert operation status(llOK, llsERROR or llOVERFLOW)
- * @brief: insert given element into specific location(given by i) of list
- * @note: while llLenth is 1, set the insert location to 2 means insert element at the end of sequence list.
- * ****************************************************************************/
 status LinkList_InsertElement(LinkList *L, int i, ElementType element);
 
 /*******************************************************************************
@@ -122,15 +67,15 @@ status LinkList_DeleteElement(LinkList *L, int i, ElementType *element);
 /*******************************************************************************
  * @name: LinkList_print
  * @param: *L -- pointer to LinkList
- * @brief: print the elements of sequence list
+ * @brief: print the elements of link list
  * ****************************************************************************/
 void LinkList_print(LinkList *L);
 
 /*******************************************************************************
  * @name: LinkList_print_all
  * @param: *L -- pointer to LinkList
- * @brief: print the whole memery value of sequence list, no matter how long
- * sequence lenth is
+ * @brief: print the whole memery value of link list, no matter how long
+ * link lenth is
  * ****************************************************************************/
 void LinkList_print_all(LinkList *L);
 
