@@ -53,30 +53,7 @@ status LinkList_GetLenth(LinkList *L, int *LinkListLenth);
 status LinkList_GetElement(LinkList *L, int i, ElementType *element);
 status LinkList_LocateElement(LinkList *L, int *i, ElementType element);
 status LinkList_InsertElement(LinkList *L, int i, ElementType element);
-
-/*******************************************************************************
- * @name: LinkList_DeleteElement
- * @param: *L -- pointer to LinkList(return value)
- *         i -- location of list where element is going to be deleted
- *         *element -- the deleted element(return value)
- * @return: delete operation status(llOK or llERROR)
- * @brief: delete element in location given by i, and return deleted element
- * ****************************************************************************/
 status LinkList_DeleteElement(LinkList *L, int i, ElementType *element);
-
-/*******************************************************************************
- * @name: LinkList_print
- * @param: *L -- pointer to LinkList
- * @brief: print the elements of link list
- * ****************************************************************************/
 void LinkList_print(LinkList *L);
-
-/*******************************************************************************
- * @name: LinkList_print_all
- * @param: *L -- pointer to LinkList
- * @brief: print the whole memery value of link list, no matter how long
- * link lenth is
- * ****************************************************************************/
-void LinkList_print_all(LinkList *L);
 
 #endif

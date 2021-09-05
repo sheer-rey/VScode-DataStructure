@@ -18,6 +18,7 @@
  * The style of these pair of files may be variable, cause it's also in my C++
  * learning process, so the programme style may transform C to C++ gradually.
  * ****************************************************************************/
+#include <iostream>
 #include <cstdlib>
 #include "LinkList.h"
 
@@ -34,13 +35,14 @@ status LinkList_Init(LinkList *L, int iLenth)
   /* Head Node */
   j->llData = iLenth;
   j->next = new LinkList;
-  j = j->next;
   /* Valid Node */
-  for (int i = 0; i < iLenth; i++)
+  j = j->next;
+  j->llData = rand() % 100; //set nodes located in 1 as random number
+  for (int i = 1; i < iLenth; i++)
   {
     j->next = new LinkList;
     j = j->next;
-    j->llData = rand() % 100;
+    j->llData = rand() % 100; //set nodes as random number
   }
   j->next = NULL;
   return llOK;
@@ -124,7 +126,7 @@ status LinkList_GetLenth(LinkList *L, int *LinkListLenth)
  * ****************************************************************************/
 status LinkList_GetElement(LinkList *L, int i, ElementType *element)
 {
-  if (i > L->llData)
+  if (i < 1 || i > L->llData)
     return llERROR;
   do
   {
@@ -150,12 +152,15 @@ status LinkList_GetElement(LinkList *L, int i, ElementType *element)
 status LinkList_LocateElement(LinkList *L, int *i, ElementType element)
 {
   int j = *i = 0;
+  /* ergodic link list */
   while (L->next != NULL)
   {
     j++;
     L = L->next;
+    /* search for 'element' successful */
     if (L->llData == element)
     {
+      /* determine if it's the first time searching to element */
       if (*i == 0)
         *i = j;
       else
@@ -170,15 +175,83 @@ status LinkList_LocateElement(LinkList *L, int *i, ElementType element)
 
 /*******************************************************************************
  * @name LinkList_InsertElement
- * @param L pointer to LinkList(return value)
- * @param i -- location of list where given element is going to be inserted
- * @param element -- the given element which is going to be inserted
- * @return: insert operation status(llOK, llERROR)
- * @brief: insert given element into specific location(given by i) of list
- * @note: while llLenth is 1, set the insert location to 2 means insert element
- * at the end of link list. In other words, the operation is going to insert
- * element into the rear of the specific location.
+ * @param L pointer to sqList(return value)
+ * @param i location of list where given element is going to be inserted
+ * @param element the given element which is going to be inserted
+ * @return insert operation status(llOK, llERROR)
+ * @brief insert given element into specific location(given by i) of list
+ * @note the operation is going to insert element into the front of the specific
+ * location element, and the other elements are shifted backwards in turn.
+ * @example set the insert location to 1, what means insert element at the 
+ * begining of sequence list.
+ * @example while list lenth is 1, set the insert location to 2 means insert
+ * element at the end of sequence list.
  * ****************************************************************************/
 status LinkList_InsertElement(LinkList *L, int i, ElementType element)
 {
+  if (i < 1 || i > L->llData + 1)
+    return llERROR;
+  L->llData++;
+  int j = 0;
+  /* Locate the node before the location to be insert */
+  while (j < i - 1)
+  {
+    j++;
+    L = L->next;
+  }
+  /* Insert node */
+  LinkList *node = new LinkList;
+  node->llData = element;
+  node->next = L->next;
+  L->next = node;
+  return llOK;
+}
+
+/*******************************************************************************
+ * @name LinkList_DeleteElement
+ * @param L pointer to LinkList(return value)
+ * @param i location of list where element is going to be deleted
+ * @param element the deleted element(return value)
+ * @return delete operation status(llOK or llERROR)
+ * @brief delete element in location given by i, and return deleted element
+ * ****************************************************************************/
+status LinkList_DeleteElement(LinkList *L, int i, ElementType *element)
+{
+  if (i < 1 || i > L->llData)
+    return llERROR;
+  L->llData--;
+  int j = 0;
+  /* Locate the node before the location to be insert */
+  while (j < i - 1)
+  {
+    j++;
+    L = L->next;
+  }
+  /* Delete node */
+  LinkList *node = L->next;
+  *element = node->llData;
+  L->next = node->next;
+  delete node;
+  return llOK;
+}
+
+/*******************************************************************************
+ * @name LinkList_print
+ * @param L pointer to LinkList
+ * @brief print the elements of link list
+ * ****************************************************************************/
+void LinkList_print(LinkList *L)
+{
+  std::cout << "Link List element is: ";
+  if (L->next == NULL)
+  {
+    std::cout << "empty" << std::endl;
+    return;
+  }
+  while (L->next != NULL)
+  {
+    L = L->next;
+    std::cout << L->llData << " ";
+  }
+  std::cout << std::endl;
 }
