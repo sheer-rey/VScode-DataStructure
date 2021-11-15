@@ -10,7 +10,7 @@
                 "-I",
                 "${workspaceFolder}/Inc", //指定头文件搜索路径为Inc文件夹
                 "-o", //指定输出文件的路径和名称
-                "${fileDirname}/${fileBasenameNoExtension}.exe", //承接上一步的-o，让可执行文件输出到源码文件所在的文件夹下的bin文件夹内，并且让它的名字和源码文件相同
+                "${workspaceFolder}/${workspaceFolderBasename}.exe", //承接上一步的-o，让可执行文件输出到源码文件所在的文件夹下的bin文件夹内，并且让它的名字和源码文件相同
                 "-g", //生成和调试有关的信息
                 "-Wall", // 开启额外警告
                 "-static-libgcc", // 静态链接libgcc
@@ -33,7 +33,7 @@
             "label": "run",
             "type": "shell",
             "dependsOn": "build", //任务依赖，因为要运行必须先构建，所以执行这个任务前必须先执行build任务，
-            "command": "${fileDirname}/${fileBasenameNoExtension}.exe", //执行exe文件，只需要指定这个exe文件在哪里就好
+            "command": "${workspaceFolder}/${workspaceFolderBasename}.exe", //执行exe文件，只需要指定这个exe文件在哪里就好
             "group": {
                 "kind": "test", //这一组是‘测试’组，将run任务放在test组里方便我们用快捷键执行
                 "isDefault": true
