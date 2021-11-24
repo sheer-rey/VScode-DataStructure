@@ -1,23 +1,30 @@
 /*******************************************************************************
- * @file SQList.cpp
+ * @file LinkList.cpp
  * @author sheer.rey
  * @date Aug.16, 2021
- * @attention In my version, the index of link list is beginning from 1, 
+ * 
+ * @attention In my version, the index of link list is beginning from 1,
  * rather than array(beginning from 0).
+ * 
  * @attention In this version, Link List has head node and the data field of
  * head node is the length of Link List (number of valid node, exclude head
  * node itself).
- * 
+ *
  * @note
  * This pair of files, or, these series of file piars is my personal realization
- * of Data Structure in corresponding learning progress. So tip.1 I hope you 
- * know is there may be some slapdash mistake.
+ * of Data Structure in corresponding learning progress.
+ *
+ * So tip.1 I hope you know is there may be some slapdash mistake.
+ *
  * Another thing is, the reason why I choose to use full english comment is I
- * want to improve my english level by this way. So tip.2 is if you find some
- * grammatical error or others and tell me that I will be very greatful to you!
- * The style of these pair of files may be variable, cause it's also in my C++
- * learning process, so the programme style may transform C to C++ gradually.
+ * want to improve my english level by this way.
+ *
+ * So tip.2 is if you find some grammatical error or others and tell me that
+ * I will be very greatful to you! The style of these pair of files may be
+ * variable, cause it's also in my C++ learning process, so the programme
+ * style may transform C to C++ gradually.
  * ****************************************************************************/
+
 #include <iostream>
 #include <cstdlib>
 #include "LinkList.h"
@@ -37,12 +44,12 @@ status LinkList_Init(LinkList *L, int iLenth)
   j->next = new LinkList;
   /* Valid Node */
   j = j->next;
-  j->llData = rand() % 100; //set nodes located in 1 as random number
+  j->llData = rand() % 100; // set nodes located in 1 as random number
   for (int i = 1; i < iLenth; i++)
   {
     j->next = new LinkList;
     j = j->next;
-    j->llData = rand() % 100; //set nodes as random number
+    j->llData = rand() % 100; // set nodes as random number
   }
   j->next = NULL;
   return llOK;
@@ -182,7 +189,7 @@ status LinkList_LocateElement(LinkList *L, int *i, ElementType element)
  * @brief insert given element into specific location(given by i) of list
  * @note the operation is going to insert element into the front of the specific
  * location element, and the other elements are shifted backwards in turn.
- * @example set the insert location to 1, what means insert element at the 
+ * @example set the insert location to 1, what means insert element at the
  * begining of sequence list.
  * @example while list lenth is 1, set the insert location to 2 means insert
  * element at the end of sequence list.
