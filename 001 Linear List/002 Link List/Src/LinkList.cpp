@@ -2,10 +2,10 @@
  * @file LinkList.cpp
  * @author sheer.rey
  * @date Aug.16, 2021
- * 
+ *
  * @attention In my version, the index of link list is beginning from 1,
  * rather than array(beginning from 0).
- * 
+ *
  * @attention In this version, Link List has head node and the data field of
  * head node is the length of Link List (number of valid node, exclude head
  * node itself).
@@ -35,7 +35,7 @@
  * @param iLenth Initiative lenth of linklist
  * @return Initialization status(llOK)
  * @brief Initialize the linklist with random value of given lenth
- * *****************************************************************************/
+ * ****************************************************************************/
 status LinkList_Init(LinkList *L, int iLenth)
 {
   LinkList *j = L;
@@ -182,7 +182,7 @@ status LinkList_LocateElement(LinkList *L, int *i, ElementType element)
 
 /*******************************************************************************
  * @name LinkList_InsertElement
- * @param L pointer to sqList(return value)
+ * @param L pointer to LinkList(return value)
  * @param i location of list where given element is going to be inserted
  * @param element the given element which is going to be inserted
  * @return insert operation status(llOK, llERROR)
@@ -190,9 +190,9 @@ status LinkList_LocateElement(LinkList *L, int *i, ElementType element)
  * @note the operation is going to insert element into the front of the specific
  * location element, and the other elements are shifted backwards in turn.
  * @example set the insert location to 1, what means insert element at the
- * begining of sequence list.
+ * begining of link list.
  * @example while list lenth is 1, set the insert location to 2 means insert
- * element at the end of sequence list.
+ * element at the end of link list.
  * ****************************************************************************/
 status LinkList_InsertElement(LinkList *L, int i, ElementType element)
 {

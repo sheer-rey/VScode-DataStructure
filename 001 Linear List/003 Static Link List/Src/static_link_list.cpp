@@ -221,7 +221,7 @@ namespace staticlinklist
   }
 
   /*****************************************************************************
-   * @name StaticLinkList
+   * @name ~StaticLinkList
    * @note destructor
    * **************************************************************************/
   StaticLinkList::~StaticLinkList()
