@@ -8,6 +8,12 @@
  *
  * @attention In this version, Link List has head node with empty data field.
  *
+ * @attention In order to use the features of class template, I use the .hpp
+ * file, which means header+cpp file, including both prototype declaration and
+ * definition.
+ * So DO NOT INCLUDE THIS FILE MULTIPLE TIMES IN DIFFERENT SOURCE FILES to avoid
+ * multi-definition error.
+ *
  * @note
  * This pair of files, or, these series of file piars is my personal realization
  * of Data Structure in corresponding learning progress.
@@ -29,7 +35,6 @@
 #include <initializer_list>
 #include <iostream>
 #include <vector>
-#include <iomanip>
 
 /* my (sheer.rey) namespace */
 namespace libofsheerrey
