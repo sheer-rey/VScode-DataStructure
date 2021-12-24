@@ -43,6 +43,7 @@ namespace libofsheerrey
   template <typename T>
   std::ostream &operator<<(std::ostream &os, Stack<T> &stack);
 
+  /* stack class template */
   template <typename T>
   class Stack
   {
@@ -104,7 +105,7 @@ namespace libofsheerrey
   /*****************************************************************************
    * @name Stack
    * @note Constructor
-   * @brief Initialize a empty Stack
+   * @brief Initialize an empty Stack
    * **************************************************************************/
   template <typename T>
   Stack<T>::Stack()
