@@ -90,6 +90,7 @@ namespace libofsheerrey
     /* Inline member functions */
     // query
     bool IsEmpty() const { return !m_size; }
+    bool IsFull() const { return m_size == m_max_size ? true : false; }
     unsigned StackSize() const { return m_size; }
     unsigned StackMaxSize() const { return m_max_size; }
 
