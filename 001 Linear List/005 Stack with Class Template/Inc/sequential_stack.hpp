@@ -33,55 +33,53 @@
 #include <iostream>
 
 /* my (sheer.rey) namespace */
-namespace libofsheerrey
-{
+namespace libofsheerrey {
   // forward declaration of stack template
   template <typename T>
   class Stack;
 
   /* template friend functions prototype to stack template */
   template <typename T>
-  std::ostream &operator<<(std::ostream &os, Stack<T> &stack);
+  std::ostream& operator<<(std::ostream& os, Stack<T>& stack);
 
   /* stack class template */
   template <typename T>
-  class Stack
-  {
-  private:
+  class Stack {
+   private:
     // use to expand stack size while
     static const unsigned cExpansionFactor = 2;
     unsigned m_max_size = 10;
     unsigned m_size;
-    T *m_stack_bottom;
-    T *m_stack_top;
+    T* m_stack_bottom;
+    T* m_stack_top;
 
-  public:
+   public:
     /* Special member functions */
     // Default Constructor
     Stack();
     // Constructor
     Stack(const unsigned max_size);
-    Stack(const std::initializer_list<T> &stack, const unsigned max_size = 0);
+    Stack(const std::initializer_list<T>& stack, const unsigned max_size = 0);
     // Copy Constructor
-    Stack(const Stack &stack);
+    Stack(const Stack& stack);
     // Move Constructor
-    Stack(Stack &&stack) = delete;
+    Stack(Stack&& stack) = delete;
     // Destructor
     ~Stack() { delete[] m_stack_bottom; }
     // Copy Operator=
-    Stack &operator=(const Stack &stack);
+    Stack& operator=(const Stack& stack);
     // Move Operator=
-    Stack &operator=(Stack &&stack) = delete;
+    Stack& operator=(Stack&& stack) = delete;
 
     /* General member functions */
     // add
-    void Push(const T &element);
+    void Push(const T& element);
     // delete
-    bool Pop(T &element);
+    bool Pop(T& element);
     // Clear
     void Clear();
     // query
-    bool GetTop(T &element) const;
+    bool GetTop(T& element) const;
     // Shrink
     void ShrinktoFit();
     // Expansion
@@ -96,7 +94,7 @@ namespace libofsheerrey
 
     /* friend function */
     // we must use <> to indicate it's a template instantiation
-    friend std::ostream &operator<<<>(std::ostream &os, Stack<T> &stack);
+    friend std::ostream& operator<< <>(std::ostream& os, Stack<T>& stack);
   };
 
   /* function definition of template class Stack */
@@ -109,8 +107,7 @@ namespace libofsheerrey
    * @brief Initialize an empty Stack
    * **************************************************************************/
   template <typename T>
-  Stack<T>::Stack()
-  {
+  Stack<T>::Stack() {
     m_size = 0;
     m_stack_bottom = new T[m_max_size];
     m_stack_top = m_stack_bottom;
@@ -123,8 +120,7 @@ namespace libofsheerrey
    * @brief Initialize a empty Stack with given stack capacity
    * **************************************************************************/
   template <typename T>
-  Stack<T>::Stack(const unsigned max_size)
-  {
+  Stack<T>::Stack(const unsigned max_size) {
     m_size = 0;
     m_max_size = max_size;
     m_stack_bottom = new T[m_max_size];
@@ -141,20 +137,16 @@ namespace libofsheerrey
    * size, the capacity of stack will expand to fit list size
    * **************************************************************************/
   template <typename T>
-  Stack<T>::Stack(const std::initializer_list<T> &stack,
-                  const unsigned max_size)
-  {
+  Stack<T>::Stack(const std::initializer_list<T>& stack,
+                  const unsigned max_size) {
     m_size = stack.size();
     // max size check
-    if (max_size < m_size)
-      m_max_size = m_size;
-    else
-      m_max_size = max_size;
+    if (max_size < m_size) m_max_size = m_size;
+    else m_max_size = max_size;
     // generate stack with initializer list
     m_stack_bottom = new T[m_max_size];
     m_stack_top = m_stack_bottom - 1;
-    for (const T &x : stack)
-    {
+    for (const T& x : stack) {
       m_stack_top++;
       *m_stack_top = x;
     }
@@ -167,14 +159,12 @@ namespace libofsheerrey
    * @brief Initialize stack with given stack object
    * **************************************************************************/
   template <typename T>
-  Stack<T>::Stack(const Stack &stack)
-  {
+  Stack<T>::Stack(const Stack& stack) {
     m_size = stack.m_size;
     m_max_size = stack.m_max_size;
     m_stack_bottom = new T[m_max_size];
     // deep copy stack
-    for (unsigned i = 0; i < m_max_size; i++)
-    {
+    for (unsigned i = 0; i < m_max_size; i++) {
       m_stack_bottom[i] = stack.m_stack_bottom[i];
       if (stack.m_stack_top == &stack.m_stack_bottom[i])
         m_stack_top = &m_stack_bottom[i];
@@ -186,13 +176,10 @@ namespace libofsheerrey
    * @note overload '=' operator
    * **************************************************************************/
   template <typename T>
-  Stack<T> &Stack<T>::operator=(const Stack &stack)
-  {
+  Stack<T>& Stack<T>::operator=(const Stack& stack) {
     // self check
-    if (this == &stack)
-      return *this;
-    else
-    {
+    if (this == &stack) return *this;
+    else {
       // clear origin stack
       delete[] m_stack_bottom;
       // generate new stack
@@ -200,8 +187,7 @@ namespace libofsheerrey
       m_max_size = stack.m_max_size;
       m_stack_bottom = new T[m_max_size];
       // deep copy stack
-      for (unsigned i = 0; i < m_max_size; i++)
-      {
+      for (unsigned i = 0; i < m_max_size; i++) {
         m_stack_bottom[i] = stack.m_stack_bottom[i];
         if (stack.m_stack_top == &stack.m_stack_bottom[i])
           m_stack_top = &m_stack_bottom[i];
@@ -216,11 +202,9 @@ namespace libofsheerrey
    * @attention if stack is full, trigger capacity expansion
    * **************************************************************************/
   template <typename T>
-  void Stack<T>::Push(const T &element)
-  {
+  void Stack<T>::Push(const T& element) {
     // full check
-    if (m_size == m_max_size)
-      Expansion();
+    if (m_size == m_max_size) Expansion();
     // push
     *++m_stack_top = element;
     m_size++;
@@ -234,12 +218,9 @@ namespace libofsheerrey
    * @brief Pop top element from stack and store it
    * **************************************************************************/
   template <typename T>
-  bool Stack<T>::Pop(T &element)
-  {
-    if (!m_size)
-      return false;
-    else
-    {
+  bool Stack<T>::Pop(T& element) {
+    if (!m_size) return false;
+    else {
       element = *m_stack_top--;
       m_size--;
       return true;
@@ -251,8 +232,7 @@ namespace libofsheerrey
    * @brief Clear stack but keep memory
    * **************************************************************************/
   template <typename T>
-  void Stack<T>::Clear()
-  {
+  void Stack<T>::Clear() {
     m_size = 0;
     m_stack_top = m_stack_bottom;
   }
@@ -265,12 +245,9 @@ namespace libofsheerrey
    * @brief Get element on stack top
    * **************************************************************************/
   template <typename T>
-  bool Stack<T>::GetTop(T &element) const
-  {
-    if (m_size == 0)
-      return false;
-    else
-    {
+  bool Stack<T>::GetTop(T& element) const {
+    if (m_size == 0) return false;
+    else {
       element = *m_stack_top;
       return true;
     }
@@ -281,23 +258,17 @@ namespace libofsheerrey
    * @brief Shrink stack to fit the current size
    * **************************************************************************/
   template <typename T>
-  void Stack<T>::ShrinktoFit()
-  {
-    if (m_max_size > m_size)
-    {
-      if (!m_size)
-      {
+  void Stack<T>::ShrinktoFit() {
+    if (m_max_size > m_size) {
+      if (!m_size) {
         m_max_size = 0;
         delete[] m_stack_bottom;
         m_stack_top = m_stack_bottom = nullptr;
-      }
-      else
-      {
+      } else {
         m_max_size = m_size;
-        T *temporary = m_stack_bottom;
+        T* temporary = m_stack_bottom;
         m_stack_bottom = new T[m_size];
-        for (unsigned i = 0; i < m_size; i++)
-          m_stack_bottom[i] = temporary[i];
+        for (unsigned i = 0; i < m_size; i++) m_stack_bottom[i] = temporary[i];
         m_stack_top = &m_stack_bottom[m_size - 1];
         delete[] temporary;
       }
@@ -309,21 +280,16 @@ namespace libofsheerrey
    * @brief Expand stack capacity by fixed expansion factor(2)
    * **************************************************************************/
   template <typename T>
-  void Stack<T>::Expansion()
-  {
-    if (!m_max_size)
-    {
+  void Stack<T>::Expansion() {
+    if (!m_max_size) {
       m_max_size = 10;
       m_stack_bottom = new T[m_max_size];
       m_stack_top = m_stack_bottom;
-    }
-    else
-    {
+    } else {
       m_max_size *= cExpansionFactor;
-      T *temporary = m_stack_bottom;
+      T* temporary = m_stack_bottom;
       m_stack_bottom = new T[m_max_size];
-      for (unsigned i = 0; i < m_size; i++)
-        m_stack_bottom[i] = temporary[i];
+      for (unsigned i = 0; i < m_size; i++) m_stack_bottom[i] = temporary[i];
       m_stack_top = &m_stack_bottom[m_size - 1];
       delete[] temporary;
     }
@@ -335,14 +301,12 @@ namespace libofsheerrey
    * @note overload '<<' operator
    * **************************************************************************/
   template <typename T>
-  std::ostream &operator<<(std::ostream &os, Stack<T> &stack)
-  {
+  std::ostream& operator<<(std::ostream& os, Stack<T>& stack) {
     using namespace std;
     os << "\nInfomation of stack" << endl;
     os << "stack size: " << stack.m_size;
     os << "\tstack max size: " << stack.m_max_size << endl;
-    if (stack.m_size > 0)
-    {
+    if (stack.m_size > 0) {
       os << "stack elements are as follow: " << endl;
       os << "   top -> " << *stack.m_stack_top << endl;
       for (int i = stack.m_size - 2; i > 0; i--)
@@ -351,6 +315,6 @@ namespace libofsheerrey
     }
     return os;
   }
-}
+}  // namespace libofsheerrey
 
 #endif

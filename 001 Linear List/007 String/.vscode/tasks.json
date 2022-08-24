@@ -95,7 +95,7 @@
 				"reveal": "always",
 				"focus": true,
 				"panel": "shared",
-				"showReuseMessage": true,
+				"showReuseMessage": false,
 			}
 		},
 		/* Run task followed by comment */
@@ -133,7 +133,7 @@
 				"reveal": "always",
 				"focus": true,
 				"panel": "shared",
-				"showReuseMessage": true,
+				"showReuseMessage": false,
 			}
 		}
 	]
