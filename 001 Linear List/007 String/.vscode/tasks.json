@@ -94,8 +94,8 @@
 				// specified that terminal always revealed while executed the task
 				"reveal": "always",
 				"focus": true,
-				"panel": "shared",
-				"showReuseMessage": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
 			}
 		},
 		/* Run task followed by comment */
@@ -132,8 +132,8 @@
 				// specified that terminal always revealed while executed the task
 				"reveal": "always",
 				"focus": true,
-				"panel": "shared",
-				"showReuseMessage": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
 			}
 		}
 	]

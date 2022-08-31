@@ -1,6 +1,12 @@
 #include <iostream>
+#include <iterator>
+#include <string>
+#include <vector>
+#include "kmp.h"
 
-int main()
-{
-    return 0;
+using namespace std;
+
+int main() {
+  cout << libofsheerrey::Search("aabaaabaaac", "aabaaac") << endl;
+  return 0;
 }
